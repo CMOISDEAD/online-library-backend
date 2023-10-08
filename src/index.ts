@@ -1,7 +1,8 @@
-import express, { Express } from "express";
 import cors from "cors";
+import express, { Express } from "express";
 import router from "./routes/api";
 import pdfRouter from "./routes/pdf";
+import authRouter from "./routes/auth";
 
 const app: Express = express();
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use("/api", router);
 app.use("/pdf", pdfRouter);
+app.use("/auth", authRouter);
 
 app.listen(app.get("port"), () => {
   console.log(`Server running on port ${app.get("port")}`);
