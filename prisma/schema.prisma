@@ -29,7 +29,8 @@ model Book {
 }
 
 model Author {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  photo     String?
   firstName String
   lastName  String
   books     Book[]

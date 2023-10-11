@@ -3,6 +3,9 @@ import express, { Express } from "express";
 import router from "./routes/api";
 import pdfRouter from "./routes/pdf";
 import authRouter from "./routes/auth";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 const app: Express = express();
 
