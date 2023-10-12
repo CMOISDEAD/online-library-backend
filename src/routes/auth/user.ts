@@ -4,6 +4,7 @@ import { sendEmail } from "./providers";
 import { render } from "@react-email/render";
 import { RecentLogin } from "../emails/templates/RecentLogin";
 import { Register } from "../emails/templates/Register";
+import { BuyMembership } from "../emails/templates/BuyMembership";
 
 const prisma = new PrismaClient();
 
@@ -13,6 +14,10 @@ export const login = async (req: Request, res: Response) => {
   const user = await prisma.user.findUnique({
     where: {
       username,
+    },
+    include: {
+      recent: true,
+      favorites: true,
     },
   });
   if (!user) return res.status(404).json({ error: "User not found" });
@@ -47,6 +52,22 @@ export const recover = async (req: Request, res: Response) => {
     },
   });
   if (!user) return res.status(404).json({ error: "User not found" });
+  res.status(200).json(user);
+};
+
+// buy a membership
+export const buyMembership = async (req: Request, res: Response) => {
+  const { id } = req.body;
+  const user = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: {
+      membership: true,
+    },
+  });
+  const html = render(BuyMembership({ url: "", username: user.username }));
+  sendEmail(user.email, "Thanks for buy a membership", html);
   res.status(200).json(user);
 };
 

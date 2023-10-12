@@ -11,21 +11,25 @@ datasource db {
 }
 
 model Book {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  isbn        String     @unique
-  cover       String
-  title       String
-  description String
-  author      Author     @relation(fields: [authorId], references: [id])
-  authorId    String     @db.ObjectId
-  published   String
-  categoryIDs String[]   @db.ObjectId
-  categories  Category[] @relation(fields: [categoryIDs], references: [id])
-  price       Float
-  numberPages Int
-  format      String
-  language    String
-  reviews     Review[]
+  id               String     @id @default(auto()) @map("_id") @db.ObjectId
+  isbn             String     @unique
+  cover            String
+  title            String
+  description      String
+  author           Author     @relation(fields: [authorId], references: [id])
+  authorId         String     @db.ObjectId
+  published        String
+  categoryIDs      String[]   @db.ObjectId
+  categories       Category[] @relation(fields: [categoryIDs], references: [id])
+  price            Float
+  numberPages      Int
+  format           String
+  language         String
+  reviews          Review[]
+  favoriteUsersIDs String[]   @default([]) @db.ObjectId
+  favoriteUsers    User[]     @relation(fields: [favoriteUsersIDs], references: [id], name: "favorite")
+  recentUsersIDs   String[]   @default([]) @db.ObjectId
+  recentUsers      User[]     @relation(fields: [recentUsersIDs], references: [id], name: "recent")
 }
 
 model Author {
@@ -55,14 +59,19 @@ model Review {
 }
 
 model User {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  username   String   @unique
-  firstname  String
-  lastname   String
-  email      String   @unique
-  password   String
-  photo      String?
-  membership Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  username     String   @unique
+  firstname    String
+  lastname     String
+  email        String   @unique
+  password     String
+  photo        String?
+  role         String   @default("user")
+  membership   Boolean  @default(false)
+  favoritesIDs String[] @default([]) @db.ObjectId
+  favorites    Book[]   @relation(fields: [favoritesIDs], references: [id], name: "favorite")
+  recentIDs    String[] @default([]) @db.ObjectId
+  recent       Book[]   @relation(fields: [recentIDs], references: [id], name: "recent")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
