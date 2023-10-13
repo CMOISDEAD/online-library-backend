@@ -1,10 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
-import { sendEmail } from "./providers";
 import { render } from "@react-email/render";
-import { RecentLogin } from "../emails/templates/RecentLogin";
-import { Register } from "../emails/templates/Register";
-import { BuyMembership } from "../emails/templates/BuyMembership";
+import { sendEmail } from "../../services/emails";
+import { Register } from "../../services/emails/templates/Register";
+import { RecentLogin } from "../../services/emails/templates/RecentLogin";
+import { BuyMembership } from "../../services/emails/templates/BuyMembership";
 
 const prisma = new PrismaClient();
 

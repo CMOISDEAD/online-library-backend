@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch '*.ts' --exec 'ts-node' src/index.ts"
+    "start": "nodemon --watch '*.ts' --exec 'ts-node' src/index.ts",
+    "email": "email dev --dir='./src/services/emails/templates/' --port=8080"
   },
   "keywords": [],
   "author": "",
