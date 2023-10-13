@@ -5,6 +5,7 @@ import { sendEmail } from "../../services/emails";
 import { Register } from "../../services/emails/templates/Register";
 import { RecentLogin } from "../../services/emails/templates/RecentLogin";
 import { BuyMembership } from "../../services/emails/templates/BuyMembership";
+import { comparition, encrypt } from "../../services/crypt";
 
 const prisma = new PrismaClient();
 
@@ -21,7 +22,7 @@ export const login = async (req: Request, res: Response) => {
     },
   });
   if (!user) return res.status(404).json({ error: "User not found" });
-  if (user.password !== password)
+  if (await comparition(user.password, password))
     return res.status(401).json({ error: "Invalid password" });
   const html = render(RecentLogin({ url: "", username: user.username }));
   sendEmail(user.email, "Recent Login", html);
@@ -37,6 +38,7 @@ export const register = async (req: Request, res: Response) => {
     },
   });
   if (exist) return res.status(409).json({ error: "User already exists" });
+  data.password = await encrypt(data.password);
   const user = await prisma.user.create({ data });
   const html = render(Register({ url: "", username: user.username }));
   sendEmail(user.email, "Welcome to Online Library", html);
@@ -65,23 +67,12 @@ export const buyMembership = async (req: Request, res: Response) => {
     data: {
       membership: true,
     },
+    include: {
+      recent: true,
+      favorites: true,
+    },
   });
   const html = render(BuyMembership({ url: "", username: user.username }));
   sendEmail(user.email, "Thanks for buy a membership", html);
-  res.status(200).json(user);
-};
-
-// update profile photo
-export const updatePhoto = async (req: Request, res: Response) => {
-  const { id, photo } = req.body;
-  if (!photo) return res.status(400).json({ error: "No photo provided" });
-  const user = await prisma.user.update({
-    where: {
-      id,
-    },
-    data: {
-      photo,
-    },
-  });
   res.status(200).json(user);
 };

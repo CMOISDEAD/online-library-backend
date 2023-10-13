@@ -51,7 +51,7 @@ export const addRecent = async (req: Request, res: Response) => {
   }
 };
 
-export const addFavorite = async (req: Request, res: Response) => {};
+export const addFavorite = async (req: Request, res: Response) => { };
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
@@ -68,6 +68,21 @@ export const updateUser = async (req: Request, res: Response) => {
       },
     });
     res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    await prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+    res.status(200).json({ message: "User deleted" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Something went wrong" });
