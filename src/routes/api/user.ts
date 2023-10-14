@@ -51,7 +51,7 @@ export const addRecent = async (req: Request, res: Response) => {
   }
 };
 
-export const addFavorite = async (req: Request, res: Response) => { };
+export const addFavorite = async (req: Request, res: Response) => {};
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
@@ -87,4 +87,18 @@ export const deleteUser = async (req: Request, res: Response) => {
     console.error(error);
     res.status(500).json({ error: "Something went wrong" });
   }
+};
+
+export const updatePhoto = async (req: Request, res: Response) => {
+  const { id, photo } = req.body;
+  if (!photo) return res.status(400).json({ error: "No photo provided" });
+  const user = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: {
+      photo,
+    },
+  });
+  res.status(200).json(user);
 };

@@ -22,7 +22,7 @@ export const login = async (req: Request, res: Response) => {
     },
   });
   if (!user) return res.status(404).json({ error: "User not found" });
-  if (await comparition(user.password, password))
+  if ((await comparition(password, user.password)) === false)
     return res.status(401).json({ error: "Invalid password" });
   const html = render(RecentLogin({ url: "", username: user.username }));
   sendEmail(user.email, "Recent Login", html);

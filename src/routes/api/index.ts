@@ -2,7 +2,7 @@ import { Router } from "express";
 import { allBooks, createBook } from "./book";
 import { allAuthors, createAuthor } from "./author";
 import { allCategories, createCategory } from "./category";
-import { addRecent, getUser, updateUser } from "./user";
+import { addRecent, getUser, updatePhoto, updateUser } from "./user";
 
 const router = Router();
 
@@ -19,5 +19,6 @@ router.post("/category", createCategory);
 router.get("/user/:id", getUser);
 router.post("/addRecent", addRecent);
 router.put("/updateUser", updateUser);
+router.post("/updatePhoto", updatePhoto);
 
 export default router;
