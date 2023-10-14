@@ -20,7 +20,7 @@ interface Props {
   username: string;
 }
 
-export const RecentLogin = ({ username }: Props) => {
+export default function Email({ username }: Props) {
   return (
     <Tailwind>
       <Html>
@@ -123,7 +123,7 @@ export const RecentLogin = ({ username }: Props) => {
       </Html>
     </Tailwind>
   );
-};
+}
 
 const main = {
   backgroundColor: "#fff",

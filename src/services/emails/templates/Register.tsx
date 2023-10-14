@@ -20,76 +20,53 @@ interface Props {
   username: string;
 }
 
-export const Register = ({ username }: Props) => {
+export default function Email({ username }: Props) {
   return (
     <Tailwind>
       <Html>
         <Head />
         <Preview>Online Library registration</Preview>
-        <Body style={main}>
+        <Body className="bg-white" style={main}>
           <Container>
-            <Section style={logo}>
-              <Text className="text-2xl font-bold text-blue-500">
-                Online Library
-              </Text>
-            </Section>
-
-            <Section style={content}>
+            <Section className="overflow-hidden border border-neutral-500">
               <Img
                 width={620}
                 src="https://react-email-demo-ijnnx5hul-resend.vercel.app/static/yelp-header.png"
               />
 
-              <Row style={{ ...boxInfos, paddingBottom: "0" }}>
-                <Column>
-                  <Heading
-                    style={{
-                      fontSize: 32,
-                      fontWeight: "bold",
-                      textAlign: "center",
-                    }}
-                  >
+              <Row className="px-2 pt-3">
+                <Column className="text-center">
+                  <Heading className="text-4xl font-bold">
                     Hi {username},
                   </Heading>
-                  <Heading
-                    as="h2"
-                    style={{
-                      fontSize: 26,
-                      fontWeight: "bold",
-                      textAlign: "center",
-                    }}
-                  >
+                  <Heading as="h2" className="text-3xl font-bold">
                     We noticed you recently registered for an account, congrats!
                   </Heading>
 
-                  <Text style={paragraph}>
+                  <Text className="text-lg">
                     We’re excited to have you on board. Online Library is a
                     community of library lovers and we’re excited to have you
                     join us.
                   </Text>
                 </Column>
               </Row>
-              <Row style={{ ...boxInfos, paddingTop: "0" }}>
-                <Column style={containerButton} colSpan={2}>
-                  <Button style={button}>activate your account</Button>
+              <Row className="px-2 pt-3">
+                <Column colSpan={2}>
+                  <Button className="py-1 px-2 text-white bg-blue-500 rounded cursor-pointer hover:bg-blue-600">
+                    activate your account
+                  </Button>
                 </Column>
               </Row>
             </Section>
 
-            <Section style={containerImageFooter}>
+            <Section>
               <Img
                 width={620}
                 src="https://react-email-demo-ijnnx5hul-resend.vercel.app/static/yelp-footer.png"
               />
             </Section>
 
-            <Text
-              style={{
-                textAlign: "center",
-                fontSize: 12,
-                color: "rgb(0,0,0, 0.7)",
-              }}
-            >
+            <Text className="text-center">
               © 2023 | Online Library., 350 Mission Street, San Francisco, CA
               94105, U.S.A. | www.onlinelibrary.com
             </Text>
@@ -98,50 +75,8 @@ export const Register = ({ username }: Props) => {
       </Html>
     </Tailwind>
   );
-};
+}
 
 const main = {
-  backgroundColor: "#fff",
-  fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+  fontFamily: "Helvetica, Arial, sans-serif",
 };
-
-const paragraph = {
-  fontSize: 16,
-};
-
-const logo = {
-  padding: "30px 20px",
-};
-
-const containerButton = {
-  display: "flex",
-  justifyContent: "center",
-  width: "100%",
-};
-
-const button = {
-  backgroundColor: "#e00707",
-  padding: "12px 30px",
-  borderRadius: 3,
-  color: "#FFF",
-  fontWeight: "bold",
-  border: "1px solid rgb(0,0,0, 0.1)",
-  cursor: "pointer",
-};
-
-const content = {
-  border: "1px solid rgb(0,0,0, 0.1)",
-  borderRadius: "3px",
-  overflow: "hidden",
-};
-
-const boxInfos = {
-  padding: "20px 40px",
-};
-
-const containerImageFooter = {
-  padding: "45px 0 0 0",
-};
-
-export default Register;

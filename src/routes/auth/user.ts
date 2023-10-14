@@ -2,14 +2,13 @@ import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import { render } from "@react-email/render";
 import { sendEmail } from "../../services/emails";
-import { Register } from "../../services/emails/templates/Register";
-import { RecentLogin } from "../../services/emails/templates/RecentLogin";
-import { BuyMembership } from "../../services/emails/templates/BuyMembership";
+import Register from "../../services/emails/templates/Register";
+import RecentLogin from "../../services/emails/templates/RecentLogin";
+import BuyMembership from "../../services/emails/templates/BuyMembership";
 import { comparition, encrypt } from "../../services/crypt";
 
 const prisma = new PrismaClient();
 
-// login a user
 export const login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
   const user = await prisma.user.findUnique({
@@ -29,7 +28,6 @@ export const login = async (req: Request, res: Response) => {
   res.status(200).json(user);
 };
 
-// register a new user
 export const register = async (req: Request, res: Response) => {
   const data = req.body;
   const exist = await prisma.user.findUnique({
@@ -45,7 +43,6 @@ export const register = async (req: Request, res: Response) => {
   res.status(200).json(user);
 };
 
-// recover a user by email
 export const recover = async (req: Request, res: Response) => {
   const { email } = req.body;
   const user = await prisma.user.findUnique({
@@ -57,7 +54,6 @@ export const recover = async (req: Request, res: Response) => {
   res.status(200).json(user);
 };
 
-// buy a membership
 export const buyMembership = async (req: Request, res: Response) => {
   const { id } = req.body;
   const user = await prisma.user.update({
