@@ -51,12 +51,12 @@ export const updateBook = async (req: Request, res: Response) => {
 export const deleteBook = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    await prisma.book.delete({
+    const books = await prisma.book.delete({
       where: {
         id,
       },
     });
-    res.status(200).json({ message: "Book deleted" });
+    res.status(200).json(books);
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: "Something went wrong" });

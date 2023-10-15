@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { allBooks, createBook } from "./book";
+import { allBooks, createBook, deleteBook } from "./book";
 import { allAuthors, createAuthor } from "./author";
 import { allCategories, createCategory } from "./category";
 import { addRecent, getUser, updatePhoto, updateUser } from "./user";
@@ -8,6 +8,7 @@ const router = Router();
 
 router.get("/book", allBooks);
 router.post("/book", createBook);
+router.delete("/book/:id", deleteBook);
 
 router.get("/author", allAuthors);
 router.post("/author", createAuthor);
