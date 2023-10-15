@@ -1,0 +1,14 @@
+# get all books
+GET {{URL}}/api/book
+
+# get book by id
+GET {{URL}}/api/book/6501300ccd4a96fa40c0aa66
+
+# get all authors
+GET {{URL}}/api/author
+
+# get all categories
+GET {{URL}}/api/category
+
+# get user by id
+GET {{URL}}/api/user/{id}

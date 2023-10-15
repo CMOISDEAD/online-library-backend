@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export const allCategories = async (_req: Request, res: Response) => {
   const categories = await prisma.category.findMany({
     include: {
-      books: true,
+      books: true
     },
   });
   res.status(200).json(categories);

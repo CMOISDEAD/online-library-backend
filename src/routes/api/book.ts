@@ -18,6 +18,25 @@ export const allBooks = async (_req: Request, res: Response) => {
   }
 };
 
+export const getBook = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const book = await prisma.book.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        author: true,
+        categories: true,
+      },
+    });
+    res.status(200).json(book);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+};
+
 export const createBook = async (req: Request, res: Response) => {
   try {
     const book = req.body;
