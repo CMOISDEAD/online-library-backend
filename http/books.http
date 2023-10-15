@@ -9,6 +9,3 @@ GET {{URL}}/api/author
 
 # get all categories
 GET {{URL}}/api/category
-
-# get user by id
-GET {{URL}}/api/user/{id}

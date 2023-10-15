@@ -1,0 +1,2 @@
+# get user by id
+GET {{URL}}/api/user/{id}
