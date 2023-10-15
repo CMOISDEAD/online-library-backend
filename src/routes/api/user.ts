@@ -51,7 +51,32 @@ export const addRecent = async (req: Request, res: Response) => {
   }
 };
 
-export const addFavorite = async (req: Request, res: Response) => {};
+export const addFavorite = async (req: Request, res: Response) => {
+  try {
+    const { userId, bookId } = req.body;
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+    if (!user) return res.status(404).json({ error: "User not found" });
+    if (user.favoritesIDs.includes(bookId)) return res.status(200).json(user);
+    const newUser = await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        favoritesIDs: {
+          push: bookId,
+        },
+      },
+    });
+    res.status(200).json(newUser);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+};
 
 export const updateUser = async (req: Request, res: Response) => {
   try {

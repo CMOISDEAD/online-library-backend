@@ -1,8 +1,15 @@
 import { Router } from "express";
-import { allBooks, createBook, deleteBook, getBook } from "./book";
 import { allAuthors, createAuthor } from "./author";
-import { allCategories, createCategory } from "./category";
-import { addRecent, getUser, updatePhoto, updateUser } from "./user";
+import { allBooks, createBook, deleteBook, getBook } from "./book";
+import { allCategories, createCategory, deleteCategory } from "./category";
+import {
+  addFavorite,
+  addRecent,
+  deleteUser,
+  getUser,
+  updatePhoto,
+  updateUser,
+} from "./user";
 
 const router = Router();
 
@@ -16,11 +23,13 @@ router.post("/author", createAuthor);
 
 router.get("/category", allCategories);
 router.post("/category", createCategory);
+router.delete("/category/:id", deleteCategory);
 
-// router.get("/user", allUsers);
 router.get("/user/:id", getUser);
 router.post("/addRecent", addRecent);
-router.put("/updateUser", updateUser);
+router.post("/addFavorite", addFavorite);
 router.post("/updatePhoto", updatePhoto);
+router.put("/updateUser", updateUser);
+router.delete("/deleteUser", deleteUser);
 
 export default router;
