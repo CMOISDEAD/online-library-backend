@@ -1,7 +1,11 @@
 import { Router } from "express";
-import { allAuthors, createAuthor } from "./author";
-import { allBooks, createBook, deleteBook, getBook } from "./book";
-import { allCategories, createCategory, deleteCategory } from "./category";
+import { allAuthors, createAuthor } from "./author.controller";
+import { allBooks, createBook, deleteBook, getBook } from "./book.controller";
+import {
+  allCategories,
+  createCategory,
+  deleteCategory,
+} from "./category.controller";
 import {
   addFavorite,
   addRecent,
@@ -9,7 +13,7 @@ import {
   getUser,
   updatePhoto,
   updateUser,
-} from "./user";
+} from "./user.controller";
 
 const router = Router();
 
