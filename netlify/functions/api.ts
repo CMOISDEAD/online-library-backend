@@ -17,8 +17,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(cors());
 
-app.use("/api", apiRouter);
-app.use("/pdf", pdfRouter);
-app.use("/auth", authRouter);
+app.use("/.netlify/functions/api", apiRouter);
+// app.use("/pdf", pdfRouter);
+// app.use("/auth", authRouter);
 
 export const handler = serverless(app);
