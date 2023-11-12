@@ -4,6 +4,7 @@ import apiRouter from "./routes/api/provider";
 import pdfRouter from "./routes/pdf/provider";
 import authRouter from "./routes/auth/provider";
 import * as dotenv from "dotenv";
+import { sendEmail } from "./services/emails";
 
 dotenv.config();
 

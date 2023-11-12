@@ -7,10 +7,12 @@ import {
   deleteCategory,
 } from "./category.controller";
 import {
+  addCar,
   addFavorite,
   addRecent,
   deleteUser,
   getUser,
+  removeCar,
   updatePhoto,
   updateUser,
 } from "./user.controller";
@@ -35,5 +37,7 @@ router.post("/addFavorite", addFavorite);
 router.post("/updatePhoto", updatePhoto);
 router.put("/updateUser", updateUser);
 router.delete("/deleteUser", deleteUser);
+router.post("/shopping", addCar);
+router.post("/removeShopping", removeCar);
 
 export default router;
