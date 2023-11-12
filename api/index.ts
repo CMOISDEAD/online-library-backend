@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(cors());
 
-app.use("/api", apiRouter);
 app.use("/pdf", pdfRouter);
+app.use("/api", apiRouter);
 app.use("/auth", authRouter);
 
 export default app;
