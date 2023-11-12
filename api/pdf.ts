@@ -1,6 +1,6 @@
 import cors from "cors";
 import express, { Express } from "express";
-import apiRouter from "../src/routes/api/provider";
+import pdfRouter from "../src/routes/pdf/provider";
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -14,6 +14,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(cors());
 
-app.use("/api", apiRouter);
+app.use("/pdf", pdfRouter);
 
 export default app;
