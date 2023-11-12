@@ -2,15 +2,15 @@
   "rewrites": [
     {
       "source": "/auth/(.*)",
-      "destination": "/auth"
+      "destination": "/api/auth/"
     },
     {
       "source": "/api/(.*)",
-      "destination": "/alow"
+      "destination": "/api/"
     },
     {
       "source": "/pdf/(.*)",
-      "destination": "/pdf"
+      "destination": "/api/pdf/"
     }
   ]
 }
