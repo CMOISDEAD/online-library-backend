@@ -210,6 +210,16 @@ export const updatePhoto = async (req: Request, res: Response) => {
     data: {
       photo,
     },
+    include: {
+     recent: true,
+     favorites: true,
+     car: {
+       include: {
+         author: true,
+       },
+     },
+     Billings: true,
+   }
   });
   res.status(200).json(user);
 };
