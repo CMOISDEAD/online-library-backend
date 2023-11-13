@@ -12,10 +12,12 @@ import {
   addRecent,
   deleteUser,
   getUser,
+  removeAllCar,
   removeCar,
   updatePhoto,
   updateUser,
 } from "./user.controller";
+import { allBillings, getBilling, saveBilling } from "./billing.controller";
 
 const router = Router();
 
@@ -39,5 +41,10 @@ router.put("/updateUser", updateUser);
 router.delete("/deleteUser", deleteUser);
 router.post("/shopping", addCar);
 router.post("/removeShopping", removeCar);
+router.delete("/clearShopping/:id", removeAllCar);
+
+router.get("/billing", allBillings);
+router.get("/billing/:id", getBilling);
+router.post("/billing", saveBilling);
 
 export default router;

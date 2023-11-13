@@ -138,6 +138,32 @@ export const removeCar = async (req: Request, res: Response) => {
   }
 };
 
+export const removeAllCar = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const user = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!user) return res.status(404).json({ error: "User not found" });
+    const newUser = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        carIDs: {
+          set: [],
+        },
+      },
+    });
+    res.status(200).json(newUser);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+};
+
 export const updateUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.body;

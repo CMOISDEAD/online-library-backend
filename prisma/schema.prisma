@@ -90,6 +90,8 @@ model Billing {
   books     Book[]   @relation(fields: [booksIDs], references: [id])
   booksIDs  String[] @db.ObjectId
   price     Float
+  country   String
+  city      String
   address   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

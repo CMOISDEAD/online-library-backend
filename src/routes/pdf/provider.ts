@@ -8,7 +8,7 @@ router.get("/:id", async (req: Request, res: Response) => {
     const options = {
       root: "public",
     };
-    res.sendFile(`${id}.pdf`, options);
+    res.sendFile(id, options);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
