@@ -24,7 +24,7 @@ export const login = async (req: Request, res: Response) => {
   if ((await comparition(password, user.password)) === false)
     return res.status(401).json({ error: "Invalid password" });
   const html = render(RecentLogin({ url: "", username: user.username }));
-  sendEmail(user.email, "Recent Login", html);
+  await sendEmail(user.email, "Recent Login", html);
   res.status(200).json(user);
 };
 
@@ -39,7 +39,7 @@ export const register = async (req: Request, res: Response) => {
   data.password = await encrypt(data.password);
   const user = await prisma.user.create({ data });
   const html = render(Register({ url: "", username: user.username }));
-  sendEmail(user.email, "Welcome to Online Library", html);
+  await sendEmail(user.email, "Welcome to Online Library", html);
   res.status(200).json(user);
 };
 
@@ -69,6 +69,6 @@ export const buyMembership = async (req: Request, res: Response) => {
     },
   });
   const html = render(BuyMembership({ url: "", username: user.username }));
-  sendEmail(user.email, "Thanks for buy a membership", html);
+  await sendEmail(user.email, "Thanks for buy a membership", html);
   res.status(200).json(user);
 };

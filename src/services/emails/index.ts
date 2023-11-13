@@ -14,10 +14,14 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendEmail = async (email: string, subject: string, html: any) => {
-  await transporter.sendMail({
-    from: process.env.GOOGLE_EMAIL,
-    to: email,
-    subject,
-    html,
-  });
+  try {
+    await transporter.sendMail({
+      from: process.env.GOOGLE_EMAIL,
+      to: email,
+      subject,
+      html,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };

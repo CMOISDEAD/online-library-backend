@@ -71,7 +71,7 @@ export const saveBilling = async (req: Request, res: Response) => {
       },
     });
     const html = render(Billing({ user, billing }));
-    sendEmail(user.email, "Billing", html);
+    await sendEmail(user.email, "Billing", html);
     res.status(200).json(billing);
   } catch (error) {
     console.error(error);
