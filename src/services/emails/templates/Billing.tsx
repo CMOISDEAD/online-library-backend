@@ -48,8 +48,8 @@ export const Billing = ({ user, billing }: Props) => (
           <Text style={{ ...global.text, marginTop: 24 }}>
             We´ve also charged your payment method for the cost of your order
             and will be removing any authorization holds. For payment details,
-            please visit your Orders page on onlinelibrary.com or in the online
-            library app.
+            please visit your Orders page on onlinelibrarian.vercel.app or in
+            the online library app.
           </Text>
         </Section>
         <Hr style={global.hr} />
@@ -75,7 +75,7 @@ export const Billing = ({ user, billing }: Props) => (
               </Column>
               <Column style={{ verticalAlign: "top", paddingLeft: "12px" }}>
                 <Text style={{ ...paragraph, fontWeight: "500" }}>
-                  {book.description}
+                  {book.title}
                 </Text>
                 <Text
                   style={global.text}
@@ -169,7 +169,7 @@ export const Billing = ({ user, billing }: Props) => (
         </Section>
         <Hr style={global.hr} />
         <Section style={paddingY}>
-          <Text style={global.heading}>onlinelibrary.com</Text>
+          <Text style={global.heading}>onlinelibrarian.vercel.app</Text>
           <Row style={categories.container}>
             <Column align="center">
               <Link href="/" style={categories.text}>
