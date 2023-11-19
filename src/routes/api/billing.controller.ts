@@ -24,9 +24,10 @@ export const allBillings = async (req: Request, res: Response) => {
 export const getBilling = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const billing = await prisma.billing.findUnique({
+    if (!id) return res.status(404).json({ error: "Billing not found" });
+    const billing = await prisma.billing.findMany({
       where: {
-        id: id,
+        userID: id,
       },
       include: {
         user: true,
@@ -70,11 +71,29 @@ export const saveBilling = async (req: Request, res: Response) => {
         user: true,
       },
     });
+    await Promise.all(data.books.map((book: any) => decrementStock(book.id)));
     const html = render(Billing({ user, billing }));
     await sendEmail(user.email, "Billing", html);
     res.status(200).json(billing);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Something went wrong" });
+  }
+};
+
+const decrementStock = async (id: string) => {
+  try {
+    await prisma.book.update({
+      where: {
+        id,
+      },
+      data: {
+        stock: {
+          decrement: 1,
+        },
+      },
+    });
+  } catch (error) {
+    console.error(error);
   }
 };

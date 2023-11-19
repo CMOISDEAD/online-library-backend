@@ -25,6 +25,7 @@ model Book {
   numberPages      Int
   format           String
   language         String
+  stock            Int        @default(10)
   reviews          Review[]
   favoriteUsers    User[]     @relation(fields: [favoriteUsersIDs], references: [id], name: "favorite")
   favoriteUsersIDs String[]   @default([]) @db.ObjectId
