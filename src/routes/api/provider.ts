@@ -18,6 +18,7 @@ import {
   updateUser,
 } from "./user.controller";
 import { allBillings, getBilling, saveBilling } from "./billing.controller";
+import { createReview, getReview, getReviews } from "./review.controller";
 
 const router = Router();
 
@@ -25,6 +26,10 @@ router.get("/book", allBooks);
 router.get("/book/:id", getBook);
 router.post("/book", createBook);
 router.delete("/book/:id", deleteBook);
+
+router.get("/reviews", getReviews);
+router.get("/reviews/:id", getReview);
+router.post("/reviews", createReview);
 
 router.get("/author", allAuthors);
 router.post("/author", createAuthor);
